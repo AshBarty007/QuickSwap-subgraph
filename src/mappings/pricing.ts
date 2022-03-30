@@ -11,7 +11,7 @@ const USDT_WETH_PAIR = '0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046' // created b
 
 export function getEthPriceInUSD(): BigDecimal {
   //For now we will only use USDC_WETH pair for ETH prices
-  let usdcPair = Pair.load(USDC_WETH_PAIR);
+  let usdcPair = Pair.load(USDC_WETH_PAIR)!;
   if (usdcPair !== null) {
     return usdcPair.token0Price
   }
@@ -87,13 +87,13 @@ export function findEthPerToken(token: Token): BigDecimal {
   let whitelist = token.whitelist
   for (let i = 0; i < whitelist.length; ++i) {
       let pairAddress = whitelist[i]
-      let pair = Pair.load(pairAddress)
+      let pair = Pair.load(pairAddress)!
       if (pair.token0 == token.id && pair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
-        let token1 = Token.load(pair.token1)
+        let token1 = Token.load(pair.token1)!
         return pair.token1Price.times(token1.derivedETH as BigDecimal) // return token1 per our token * Eth per token 1
       }
       if (pair.token1 == token.id && pair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
-        let token0 = Token.load(pair.token0)
+        let token0 = Token.load(pair.token0)!
         return pair.token0Price.times(token0.derivedETH as BigDecimal) // return token0 per our token * ETH per token 0
       }
   }

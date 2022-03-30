@@ -9,7 +9,7 @@ export function updateUniswapDayData(uniswap: UniswapFactory, event: ethereum.Ev
   let timestamp = event.block.timestamp.toI32()
   let dayID = timestamp / 86400
   let dayStartTimestamp = dayID * 86400
-  let uniswapDayData = UniswapDayData.load(dayID.toString())
+  let uniswapDayData = UniswapDayData.load(dayID.toString())!
   if (uniswapDayData === null) {
     uniswapDayData = new UniswapDayData(dayID.toString())
     uniswapDayData.date = dayStartTimestamp
@@ -37,7 +37,7 @@ export function updatePairDayData(pair: Pair, event: ethereum.Event): PairDayDat
     .concat('-')
     .concat(BigInt.fromI32(dayID).toString())
   // let pair = Pair.load(event.address.toHexString())
-  let pairDayData = PairDayData.load(dayPairID)
+  let pairDayData = PairDayData.load(dayPairID)!
   if (pairDayData === null) {
     pairDayData = new PairDayData(dayPairID)
     pairDayData.date = dayStartTimestamp
@@ -69,7 +69,7 @@ export function updatePairHourData(pair: Pair, event: ethereum.Event): PairHourD
     .concat('-')
     .concat(BigInt.fromI32(hourIndex).toString())
   // let pair = Pair.load(event.address.toHexString())
-  let pairHourData = PairHourData.load(hourPairID)
+  let pairHourData = PairHourData.load(hourPairID)!
   if (pairHourData === null) {
     pairHourData = new PairHourData(hourPairID)
     pairHourData.hourStartUnix = hourStartUnix
@@ -98,7 +98,7 @@ export function updateTokenDayData(token: Token, event: ethereum.Event, bundle: 
     .concat('-')
     .concat(BigInt.fromI32(dayID).toString())
 
-  let tokenDayData = TokenDayData.load(tokenDayID)
+  let tokenDayData = TokenDayData.load(tokenDayID)!
   if (tokenDayData === null) {
     tokenDayData = new TokenDayData(tokenDayID)
     tokenDayData.date = dayStartTimestamp

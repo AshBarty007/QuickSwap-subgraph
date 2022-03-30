@@ -16,7 +16,7 @@ import { isOnWhitelist } from './pricing'
 
 export function handleNewPair(event: PairCreated): void {
   // load factory (create if first exchange)
-  let factory = UniswapFactory.load(FACTORY_ADDRESS)
+  let factory = UniswapFactory.load(FACTORY_ADDRESS)!
   if (factory === null) {
     factory = new UniswapFactory(FACTORY_ADDRESS)
     factory.pairCount = 0
@@ -36,8 +36,8 @@ export function handleNewPair(event: PairCreated): void {
   factory.save()
 
   // create the tokens
-  let token0 = Token.load(event.params.token0.toHexString())
-  let token1 = Token.load(event.params.token1.toHexString())
+  let token0 = Token.load(event.params.token0.toHexString())!
+  let token1 = Token.load(event.params.token1.toHexString())!
 
   // fetch info if null
   if (token0 === null) {

@@ -132,9 +132,9 @@ export function createLiquidityPosition(exchange: Address, user: Address): Liqui
     .toHexString()
     .concat('-')
     .concat(user.toHexString())
-  let liquidityTokenBalance = LiquidityPosition.load(id)
+  let liquidityTokenBalance = LiquidityPosition.load(id)!
   if (liquidityTokenBalance === null) {
-    let pair = Pair.load(exchange.toHexString())
+    let pair = Pair.load(exchange.toHexString())!
     pair.liquidityProviderCount = pair.liquidityProviderCount.plus(ONE_BI)
     liquidityTokenBalance = new LiquidityPosition(id)
     liquidityTokenBalance.liquidityTokenBalance = ZERO_BD
@@ -148,7 +148,7 @@ export function createLiquidityPosition(exchange: Address, user: Address): Liqui
 }
 
 export function createUser(address: Address): void {
-  let user = User.load(address.toHexString())
+  let user = User.load(address.toHexString())!
   if (user === null) {
     user = new User(address.toHexString())
     user.usdSwapped = ZERO_BD
@@ -158,10 +158,10 @@ export function createUser(address: Address): void {
 
 export function createLiquiditySnapshot(position: LiquidityPosition, event: ethereum.Event): void {
   let timestamp = event.block.timestamp.toI32()
-  let bundle = Bundle.load('1')
-  let pair = Pair.load(position.pair)
-  let token0 = Token.load(pair.token0)
-  let token1 = Token.load(pair.token1)
+  let bundle = Bundle.load('1')!
+  let pair = Pair.load(position.pair)!
+  let token0 = Token.load(pair.token0)!
+  let token1 = Token.load(pair.token1)!
 
   // create new snapshot
   let snapshot = new LiquidityPositionSnapshot(position.id.concat(timestamp.toString()))
