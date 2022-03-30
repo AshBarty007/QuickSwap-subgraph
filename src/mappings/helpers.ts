@@ -169,8 +169,10 @@ export function createLiquiditySnapshot(position: LiquidityPosition, event: ethe
   snapshot.block = event.block.number.toI32()
   snapshot.user = position.user
   snapshot.pair = position.pair
-  snapshot.token0PriceUSD = token0.derivedETH.times(bundle.ethPrice)
-  snapshot.token1PriceUSD = token1.derivedETH.times(bundle.ethPrice)
+  let tk0 = token0.derivedETH!
+  let tk1 = token1.derivedETH!
+  snapshot.token0PriceUSD = tk0.times(bundle.ethPrice)
+  snapshot.token1PriceUSD = tk1.times(bundle.ethPrice)
   snapshot.reserve0 = pair.reserve0
   snapshot.reserve1 = pair.reserve1
   snapshot.reserveUSD = pair.reserveUSD

@@ -113,8 +113,10 @@ export function getTrackedVolumeUSD(
   token1: Token,
   bundle: Bundle
 ): BigDecimal {
-  let price0 = token0.derivedETH.times(bundle.ethPrice)
-  let price1 = token1.derivedETH.times(bundle.ethPrice)
+  let tk0 = token0.derivedETH!
+  let tk1 = token1.derivedETH!  
+  let price0 = tk0.times(bundle.ethPrice)
+  let price1 = tk1.times(bundle.ethPrice)
 
   // if less than 1 LPs, require high minimum reserve amount amount or return 0
   /**if (pair.liquidityProviderCount.lt(BigInt.fromI32(1))) {
@@ -172,8 +174,10 @@ export function getTrackedLiquidityUSD(
   token1: Token,
   bundle: Bundle
 ): BigDecimal {
-  let price0 = token0.derivedETH.times(bundle.ethPrice)
-  let price1 = token1.derivedETH.times(bundle.ethPrice)
+  let tk0 = token0.derivedETH!
+  let tk1 = token1.derivedETH!
+  let price0 = tk0.times(bundle.ethPrice)
+  let price1 = tk1.times(bundle.ethPrice)
 
   // both are whitelist tokens, take average of both amounts
   if (WHITELIST.includes(token0.id) && WHITELIST.includes(token1.id)) {

@@ -297,9 +297,11 @@ export function handleMint(event: Mint): void {
 
   // get new amounts of USD and ETH for tracking
   let bundle = Bundle.load('1')!
-  let amountTotalUSD = token1.derivedETH
+  let tk0 = token0.derivedETH!
+  let tk1 = token1.derivedETH!
+  let amountTotalUSD = tk1
     .times(token1Amount)
-    .plus(token0.derivedETH.times(token0Amount))
+    .plus(tk0.times(token0Amount))
     .times(bundle.ethPrice)
 
   // update txn counts
@@ -362,9 +364,11 @@ export function handleBurn(event: Burn): void {
 
   // get new amounts of USD and ETH for tracking
   let bundle = Bundle.load('1')!
-  let amountTotalUSD = token1.derivedETH
+  let tk1 = token1.derivedETH!
+  let tk0 = token0.derivedETH!
+  let amountTotalUSD = tk1
     .times(token1Amount)
-    .plus(token0.derivedETH.times(token0Amount))
+    .plus(tk0.times(token0Amount))
     .times(bundle.ethPrice)
 
   // update txn counts
@@ -418,11 +422,13 @@ export function handleSwap(event: Swap): void {
 
   // ETH/USD prices
   let bundle = Bundle.load('1')!
-
+   
+  let tk0 = token0.derivedETH!
+  let tk1 = token1.derivedETH!
   // get total amounts of derived USD and ETH for tracking
-  let derivedAmountETH = token1.derivedETH
+  let derivedAmountETH = tk1
     .times(amount1Total)
-    .plus(token0.derivedETH.times(amount0Total))
+    .plus(tk0.times(amount0Total))
     .div(BigDecimal.fromString('2'))
   let derivedAmountUSD = derivedAmountETH.times(bundle.ethPrice)
 
