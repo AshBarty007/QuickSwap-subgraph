@@ -45,7 +45,7 @@ export function handleTransfer(event: Transfer): void {
   //createUser(to)
 
   // get pair and load contract
-  let pair = Pair.load(event.address.toHexString())
+  let pair = Pair.load(event.address.toHexString())!
   let pairContract = PairContract.bind(event.address)
 
   // liquidity token amount being transfered
