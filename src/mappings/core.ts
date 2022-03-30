@@ -26,8 +26,8 @@ import {
 } from './helpers'
 
 function isCompleteMint(mintId: string): boolean {
-  let sender = MintEvent.load(mintId).sender!
-  return  sender !== null // sufficient checks
+  let mEvent = MintEvent.load(mintId)!
+  return  mEvent.sender !== null // sufficient checks
 }
 
 export function handleTransfer(event: Transfer): void {
