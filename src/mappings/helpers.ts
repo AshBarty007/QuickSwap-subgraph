@@ -107,7 +107,7 @@ export function fetchTokenName(tokenAddress: Address): string {
 
 export function fetchTokenTotalSupply(tokenAddress: Address): BigInt {
   let contract = ERC20.bind(tokenAddress)
-  let totalSupplyValue = null
+  let totalSupplyValue = 0
   let totalSupplyResult = contract.try_totalSupply()
   if (!totalSupplyResult.reverted) {
     totalSupplyValue = changetype<i32>(totalSupplyResult)
@@ -119,7 +119,7 @@ export function fetchTokenDecimals(tokenAddress: Address): BigInt {
   // hardcode overrides
   let contract = ERC20.bind(tokenAddress)
   // try types uint8 for decimals
-  let decimalValue = null
+  let decimalValue = 0
   let decimalResult = contract.try_decimals()
   if (!decimalResult.reverted) {
     decimalValue = decimalResult.value
@@ -132,7 +132,7 @@ export function createLiquidityPosition(exchange: Address, user: Address): Liqui
     .toHexString()
     .concat('-')
     .concat(user.toHexString())
-  let liquidityTokenBalance = LiquidityPosition.load(id)!
+  let liquidityTokenBalance = LiquidityPosition.load(id)
   if (liquidityTokenBalance === null) {
     let pair = Pair.load(exchange.toHexString())!
     pair.liquidityProviderCount = pair.liquidityProviderCount.plus(ONE_BI)

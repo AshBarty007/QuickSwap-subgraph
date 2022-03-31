@@ -53,7 +53,7 @@ export function handleTransfer(event: Transfer): void {
   let value = convertTokenToDecimal(event.params.value, BI_18)
 
   // get or create transaction
-  let transaction = Transaction.load(transactionHash)!
+  let transaction = Transaction.load(transactionHash)
   if (transaction === null) {
     transaction = new Transaction(transactionHash)
     transaction.blockNumber = event.block.number
@@ -477,7 +477,7 @@ export function handleSwap(event: Swap): void {
   token1.save()
   uniswap.save()
 
-  let transaction = Transaction.load(event.transaction.hash.toHexString())!
+  let transaction = Transaction.load(event.transaction.hash.toHexString())
   if (transaction === null) {
     transaction = new Transaction(event.transaction.hash.toHexString())
     transaction.blockNumber = event.block.number

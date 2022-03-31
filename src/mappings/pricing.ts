@@ -11,7 +11,7 @@ const USDT_WETH_PAIR = '0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046' // created b
 
 export function getEthPriceInUSD(): BigDecimal {
   //For now we will only use USDC_WETH pair for ETH prices
-  let usdcPair = Pair.load(USDC_WETH_PAIR)!;
+  let usdcPair = Pair.load(USDC_WETH_PAIR);
   if (usdcPair !== null) {
     return usdcPair.token0Price
   }
